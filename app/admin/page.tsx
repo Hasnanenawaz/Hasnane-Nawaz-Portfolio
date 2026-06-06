@@ -335,7 +335,7 @@ export default function AdminPage() {
   // Shell: fixed overlay covers global Navbar (zIndex must exceed navbar z-50=50)
   const shell: React.CSSProperties = {
     position: 'fixed', inset: 0, zIndex: 9999,
-    overflowY: 'auto', background: c.pageBg,
+    overflowY: 'scroll', background: c.pageBg,
     fontFamily: "'Segoe UI', system-ui, sans-serif",
     colorScheme: 'light',
   }
@@ -343,7 +343,7 @@ export default function AdminPage() {
   // ── Loading ────────────────────────────────────────────────────────────────
   if (authed === null) {
     return (
-      <div style={shell}>
+      <div style={shell} data-lenis-prevent>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: '100vh' }}>
           <p style={{ color: c.muted, fontSize: 15 }}>Loading…</p>
         </div>
