@@ -258,6 +258,7 @@ export default function AdminPage() {
   const [showPass, setShowPass] = useState(false)
   const [loginError, setLoginError] = useState('')
   const [blogs, setBlogs] = useState<Blog[]>([])
+  const [apiError, setApiError] = useState('')
   const [view, setView] = useState<'list' | 'new' | 'edit'>('list')
   const [editing, setEditing] = useState<Blog | null>(null)
   const [saving, setSaving] = useState(false)
@@ -267,7 +268,7 @@ export default function AdminPage() {
   useEffect(() => {
     fetch('/api/blogs?admin=true')
       .then(r => r.ok ? r.json() : Promise.reject())
-      .then((d: Blog[]) => { setBlogs(d); setAuthed(true) })
+      .then((d: unknown) => { setBlogs(Array.isArray(d) ? d : []); setAuthed(true) })
       .catch(() => setAuthed(false))
   }, [])
 
@@ -288,8 +289,20 @@ export default function AdminPage() {
 
   async function loadBlogs() {
     setLoading(true)
-    const res = await fetch('/api/blogs?admin=true')
-    setBlogs(await res.json() as Blog[])
+    setApiError('')
+    try {
+      const res = await fetch('/api/blogs?admin=true')
+      const data: unknown = await res.json()
+      if (!res.ok) {
+        const msg = (data as { error?: string })?.error ?? `API error ${res.status}`
+        setApiError(msg)
+        setLoading(false)
+        return
+      }
+      setBlogs(Array.isArray(data) ? data : [])
+    } catch {
+      setApiError('Failed to load blogs. Check Supabase configuration.')
+    }
     setLoading(false)
   }
 
@@ -480,7 +493,17 @@ export default function AdminPage() {
               <p style={{ color: c.muted, padding: '40px 0', textAlign: 'center' }}>Loading…</p>
             )}
 
-            {!loading && blogs.length === 0 && (
+            {apiError && (
+              <div style={{
+                background: '#fff2f2', border: `1px solid #fca5a5`,
+                borderRadius: 10, padding: '16px 20px', marginBottom: 16,
+                color: c.error, fontSize: 13,
+              }}>
+                <strong>Error loading blogs:</strong> {apiError}
+              </div>
+            )}
+
+            {!loading && !apiError && blogs.length === 0 && (
               <div style={{
                 background: c.cardBg, border: `2px dashed ${c.cardBorder}`,
                 borderRadius: 16, padding: '64px 24px', textAlign: 'center',
