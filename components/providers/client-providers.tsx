@@ -1,6 +1,5 @@
 "use client";
 
-import { AnimatePresence } from "framer-motion";
 import { Cursor } from "@/components/shared/cursor";
 import { LoadingScreen } from "@/components/shared/loading-screen";
 import { SmoothScroll } from "@/components/shared/smooth-scroll";
@@ -12,7 +11,7 @@ export function ClientProviders({ children }: { children: React.ReactNode }) {
       <SmoothScroll />
       <LoadingScreen />
       <Cursor />
-      <AnimatePresence mode="wait">{children}</AnimatePresence>
+      {children}
     </ThemeProvider>
   );
 }
