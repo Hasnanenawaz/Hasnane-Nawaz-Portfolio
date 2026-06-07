@@ -7,10 +7,26 @@ export function Footer() {
     <footer className="border-t-2 border-foreground bg-foreground py-10 text-background">
       <div className="container grid gap-8 md:grid-cols-[1.2fr_0.8fr] md:items-end">
         <div>
-          <p className="font-display text-4xl font-black uppercase md:text-6xl">Build the next growth story.</p>
-          <p className="mt-4 max-w-xl text-background/75">
-            Social media marketing, community growth, content strategy, and sales-aligned lead systems.
+          <p className="font-display text-3xl font-black uppercase sm:text-4xl md:text-6xl">Build the next growth story.</p>
+          <p
+            className="mt-4 max-w-xl font-display text-xl font-black uppercase tracking-widest sm:text-2xl"
+            style={{
+              background: "linear-gradient(90deg, #d4af37, #fff8dc, #f5c518, #d4af37, #fff8dc, #d4af37)",
+              backgroundSize: "300% auto",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              backgroundClip: "text",
+              animation: "shimmer 3s linear infinite",
+            }}
+          >
+            ✦ Created by Hasnane Nawaz ✦
           </p>
+          <style>{`
+            @keyframes shimmer {
+              0% { background-position: 0% center; }
+              100% { background-position: 300% center; }
+            }
+          `}</style>
         </div>
         <div className="grid gap-3 text-sm">
           <Link className="inline-flex items-center gap-2 hover:text-primary" href={`mailto:${siteConfig.email}`}>
