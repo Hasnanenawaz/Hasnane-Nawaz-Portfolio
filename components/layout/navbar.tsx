@@ -14,7 +14,7 @@ export function Navbar() {
   return (
     <header className="fixed left-0 right-0 top-0 z-50 border-b-2 border-foreground bg-background/88 backdrop-blur">
       <nav className="container flex h-16 items-center justify-between">
-        <Link href="#top" className="font-display text-xl font-black uppercase">
+        <Link href="/" className="font-display text-xl font-black uppercase">
           Hasnane<span className="text-coral">.</span>
         </Link>
         <div className="hidden items-center gap-2 md:flex">
