@@ -30,6 +30,11 @@ export const metadata: Metadata = {
   authors: [{ name: siteConfig.person, url: siteConfig.url }],
   creator: siteConfig.person,
   keywords: siteConfig.keywords,
+  icons: {
+    icon: "/hasnane.png",
+    shortcut: "/hasnane.png",
+    apple: "/hasnane.png",
+  },
   openGraph: {
     title: siteConfig.name,
     description: siteConfig.description,

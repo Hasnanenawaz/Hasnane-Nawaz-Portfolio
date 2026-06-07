@@ -2,7 +2,7 @@ export const siteConfig = {
   person: "Hasnane Nawaz",
   name: "Hasnane Nawaz - Social Media Marketing Portfolio",
   role: "Social Media Marketer | Content & Growth Strategy",
-  url: "https://hasnane-nawaz.vercel.app",
+  url: "https://www.hasnanenawaz.in",
   email: "hasnanenawaz@gmail.com",
   phone: "+91 8269786782",
   location: "Durg, Chhattisgarh, India",

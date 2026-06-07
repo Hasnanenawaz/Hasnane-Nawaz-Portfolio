@@ -117,7 +117,7 @@ function ImageUploader({ value, onChange }: { value: string; onChange: (v: strin
         onMouseEnter={e => { e.currentTarget.style.borderColor = c.green; e.currentTarget.style.background = '#f0ece4' }}
         onMouseLeave={e => { e.currentTarget.style.borderColor = c.inputBorder; e.currentTarget.style.background = '#fafaf8' }}
       >
-        <div style={{ fontSize: 28, marginBottom: 8, opacity: 0.5 }}>⬆</div>
+        <div style={{ fontSize: 28, marginBottom: 8, opacity: 0.5 }}>&#x2B06;</div>
         {uploading ? 'Uploading…' : 'Click or drag to upload cover image'}
       </div>
       <input ref={inputRef} type="file" accept="image/*" style={{ display: 'none' }}
@@ -354,54 +354,147 @@ export default function AdminPage() {
   // ── Login ──────────────────────────────────────────────────────────────────
   if (!authed) {
     return (
-      <div style={{ ...shell, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 24 }}>
+      <div data-lenis-prevent style={{
+        position: 'fixed', inset: 0, zIndex: 9999,
+        display: 'flex', alignItems: 'center', justifyContent: 'center',
+        overflowY: 'auto', padding: '24px 20px',
+        backgroundImage: "url('/admin-bg.png')",
+        backgroundSize: 'cover', backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
+        fontFamily: "'Segoe UI', system-ui, sans-serif",
+        colorScheme: 'dark',
+      }}>
+        <style>{`
+          @keyframes red-glow-pulse {
+            0%,100%{box-shadow:0 0 20px #ff0000,0 0 50px rgba(255,0,0,0.3),inset 0 0 30px rgba(255,0,0,0.05)}
+            50%{box-shadow:0 0 35px #ff0000,0 0 80px rgba(255,0,0,0.45),inset 0 0 50px rgba(255,0,0,0.1)}
+          }
+          .admin-signin-btn:hover {
+            filter: brightness(1.15) !important;
+            transform: translateY(-1px) !important;
+          }
+          .admin-signin-btn:active { transform: translateY(0) !important; }
+          .admin-pass-input:focus {
+            border-color: #ff2222 !important;
+            box-shadow: 0 0 0 3px rgba(255,34,34,0.2) !important;
+          }
+        `}</style>
+
+        {/* Phone-style login card */}
         <div style={{
-          background: c.cardBg, border: `1px solid ${c.cardBorder}`,
-          borderRadius: 20, padding: '48px 40px', width: '100%', maxWidth: 420,
-          boxShadow: c.shadowMd,
+          background: 'rgba(8,4,4,0.92)',
+          border: '2px solid #cc0000',
+          borderRadius: 32,
+          padding: '36px 32px 28px',
+          width: '100%', maxWidth: 360,
+          backdropFilter: 'blur(12px)',
+          animation: 'red-glow-pulse 3s ease-in-out infinite',
+          textAlign: 'center',
         }}>
-          <div style={{ textAlign: 'center', marginBottom: 32 }}>
-            <div style={{
-              width: 56, height: 56, borderRadius: 14, background: c.pageBg,
-              border: `1px solid ${c.cardBorder}`, display: 'flex',
-              alignItems: 'center', justifyContent: 'center',
-              fontSize: 26, margin: '0 auto 16px',
-            }}>🌿</div>
-            <h1 style={{ color: c.text, fontSize: 22, fontWeight: 800, margin: '0 0 4px' }}>Blog Admin</h1>
-            <p style={{ color: c.subtle, fontSize: 13, margin: 0 }}>hasnanenawaz.in</p>
+
+          {/* Warning triangle */}
+          <div style={{ marginBottom: 6 }}>
+            <svg width="52" height="46" viewBox="0 0 52 46" fill="none" style={{ display: 'inline-block' }}>
+              <path d="M26 2L50 44H2L26 2Z" stroke="#cc0000" strokeWidth="3" fill="rgba(180,0,0,0.12)" />
+              <text x="26" y="36" textAnchor="middle" fill="#cc0000" fontSize="20" fontWeight="900">!</text>
+            </svg>
           </div>
 
-          <label style={{ ...lbl, marginBottom: 7 }}>Password</label>
-          <div style={{ position: 'relative', marginBottom: 16 }}>
-            <input
-              type={showPass ? 'text' : 'password'}
-              placeholder="Enter admin password"
-              value={password}
-              onChange={(e: ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
-              onKeyDown={(e: KeyboardEvent<HTMLInputElement>) => e.key === 'Enter' && login()}
-              onFocus={e => e.currentTarget.style.borderColor = c.inputFocus}
-              onBlur={e => e.currentTarget.style.borderColor = loginError ? c.error : c.inputBorder}
-              style={{ ...inp, paddingRight: 52, borderColor: loginError ? c.error : c.inputBorder }}
-            />
-            <button onClick={() => setShowPass(v => !v)}
-              style={{ position: 'absolute', right: 12, top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none', cursor: 'pointer', color: c.subtle, fontSize: 12, fontWeight: 600 }}
-              tabIndex={-1}>{showPass ? 'Hide' : 'Show'}</button>
+          {/* CAUTION */}
+          <p style={{
+            color: '#cc0000', fontSize: 26, fontWeight: 900, margin: '0 0 4px',
+            letterSpacing: 4, textTransform: 'uppercase',
+            textShadow: '0 0 14px rgba(204,0,0,0.7)',
+          }}>CAUTION</p>
+
+          {/* Subtitle */}
+          <p style={{ color: '#ffffff', fontSize: 12, fontWeight: 700, margin: '0 0 2px', letterSpacing: 1.5 }}>
+            UNAUTHORIZED ACCESS
+          </p>
+          <p style={{ color: '#cc0000', fontSize: 12, fontWeight: 700, margin: '0 0 14px', letterSpacing: 1.5 }}>
+            IS STRICTLY PROHIBITED
+          </p>
+
+          {/* Skull divider */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: 10, margin: '0 0 14px' }}>
+            <div style={{ flex: 1, height: 1, background: 'rgba(204,0,0,0.4)' }} />
+            <span style={{ fontSize: 18, filter: 'drop-shadow(0 0 6px #cc0000)' }}>&#9760;</span>
+            <div style={{ flex: 1, height: 1, background: 'rgba(204,0,0,0.4)' }} />
+          </div>
+
+          {/* Blog Admin heading */}
+          <h1 style={{
+            color: '#ffffff', fontSize: 26, fontWeight: 700, margin: '0 0 4px', letterSpacing: 0.5,
+          }}>Blog Admin</h1>
+          <p style={{ color: '#cc0000', fontSize: 13, margin: '0 0 22px' }}>hasnanenawaz.in</p>
+
+          {/* Password field */}
+          <div style={{ textAlign: 'left', marginBottom: 12 }}>
+            <label style={{
+              color: '#cc0000', fontSize: 11, fontWeight: 800, display: 'block',
+              marginBottom: 7, letterSpacing: 2, textTransform: 'uppercase',
+            }}>Password</label>
+            <div style={{ position: 'relative' }}>
+              <input
+                className="admin-pass-input"
+                type={showPass ? 'text' : 'password'}
+                placeholder="Enter admin password"
+                value={password}
+                onChange={(e: ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
+                onKeyDown={(e: KeyboardEvent<HTMLInputElement>) => e.key === 'Enter' && login()}
+                style={{
+                  width: '100%', padding: '13px 48px 13px 16px', borderRadius: 10,
+                  border: `1.5px solid ${loginError ? '#ff0000' : 'rgba(200,0,0,0.5)'}`,
+                  background: 'rgba(20,0,0,0.7)', color: '#ffffff',
+                  fontSize: 14, outline: 'none', boxSizing: 'border-box',
+                  fontFamily: 'inherit', transition: 'border-color 0.15s, box-shadow 0.15s',
+                }}
+              />
+              <button
+                onClick={() => setShowPass(v => !v)}
+                style={{
+                  position: 'absolute', right: 14, top: '50%', transform: 'translateY(-50%)',
+                  background: 'none', border: 'none', cursor: 'pointer',
+                  color: 'rgba(200,100,100,0.8)', fontSize: 16, padding: '4px',
+                  display: 'flex', alignItems: 'center',
+                }}
+                tabIndex={-1}
+              >
+                {showPass ? (
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/><path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
+                ) : (
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                )}
+              </button>
+            </div>
           </div>
 
           {loginError && (
-            <p style={{ color: c.error, fontSize: 13, marginBottom: 14, textAlign: 'center' }}>{loginError}</p>
+            <p style={{ color: '#ff4444', fontSize: 13, margin: '0 0 12px', textAlign: 'center' }}>
+              {loginError}
+            </p>
           )}
 
-          <button onClick={login}
+          {/* Sign in button */}
+          <button
+            className="admin-signin-btn"
+            onClick={login}
             style={{
-              width: '100%', padding: '13px', borderRadius: 10, border: 'none',
-              background: c.btnPrimary, color: c.btnPrimaryText,
-              fontWeight: 700, fontSize: 15, cursor: 'pointer',
+              width: '100%', padding: '14px', borderRadius: 10, border: 'none',
+              background: 'linear-gradient(135deg, #cc0000 0%, #ff1a1a 50%, #cc0000 100%)',
+              color: '#ffffff', fontWeight: 800, fontSize: 15,
+              cursor: 'pointer', letterSpacing: 2, textTransform: 'uppercase',
+              boxShadow: '0 4px 20px rgba(204,0,0,0.5)',
+              transition: 'filter 0.2s, transform 0.15s',
+              marginBottom: 16,
             }}
-            onMouseEnter={e => { e.currentTarget.style.background = c.btnPrimaryHover }}
-            onMouseLeave={e => { e.currentTarget.style.background = c.btnPrimary }}>
-            Sign in →
+          >
+            SIGN IN &nbsp;&#8594;
           </button>
+
+          <p style={{ color: 'rgba(255,255,255,0.35)', fontSize: 12, margin: 0 }}>
+            Authorized personnel only
+          </p>
         </div>
       </div>
     )
@@ -409,7 +502,7 @@ export default function AdminPage() {
 
   // ── Dashboard ──────────────────────────────────────────────────────────────
   return (
-    <div style={shell}>
+    <div style={shell} data-lenis-prevent>
 
       {/* Header */}
       <header style={{
@@ -448,7 +541,7 @@ export default function AdminPage() {
                   background: 'transparent', color: c.headerText,
                   fontWeight: 700, fontSize: 13, cursor: 'pointer',
                 }}>
-                ← All blogs
+                &#8592; All blogs
               </button>
             )}
             <button onClick={logout}
@@ -458,7 +551,7 @@ export default function AdminPage() {
                 background: 'transparent', color: c.headerMuted,
                 fontSize: 13, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 6,
               }}>
-              ↪ Log out
+              &#8618; Log out
             </button>
           </div>
         </div>
@@ -508,7 +601,7 @@ export default function AdminPage() {
                 background: c.cardBg, border: `2px dashed ${c.cardBorder}`,
                 borderRadius: 16, padding: '64px 24px', textAlign: 'center',
               }}>
-                <div style={{ fontSize: 44, marginBottom: 14 }}>📝</div>
+                <div style={{ fontSize: 44, marginBottom: 14 }}>&#x1F4DD;</div>
                 <p style={{ color: c.muted, fontSize: 16, marginBottom: 20 }}>No blogs yet.</p>
                 <button onClick={() => { setEditing(null); setView('new') }}
                   style={{
@@ -516,7 +609,7 @@ export default function AdminPage() {
                     background: c.btnPrimary, color: c.btnPrimaryText,
                     fontWeight: 700, fontSize: 14, cursor: 'pointer',
                   }}>
-                  Write your first post →
+                  Write your first post &#8594;
                 </button>
               </div>
             )}
@@ -540,7 +633,7 @@ export default function AdminPage() {
                         width: 130, height: 100, borderRadius: 8, background: '#f0ece4',
                         display: 'flex', alignItems: 'center', justifyContent: 'center',
                         flexShrink: 0, fontSize: 28, color: '#bbb',
-                      }}>📄</div>
+                      }}>&#x1F4C4;</div>
                     )}
 
                     {/* Text */}
@@ -599,7 +692,7 @@ export default function AdminPage() {
                           cursor: 'pointer', fontSize: 12, fontWeight: 600,
                           textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: 5,
                         }}>
-                        <span style={{ fontSize: 13 }}>↗</span> View live
+                        <span style={{ fontSize: 13 }}>&#8599;</span> View live
                       </a>
                     )}
 
@@ -610,7 +703,7 @@ export default function AdminPage() {
                         cursor: 'pointer', fontSize: 12, fontWeight: 700,
                         display: 'inline-flex', alignItems: 'center', gap: 5,
                       }}>
-                      <span style={{ fontSize: 13 }}>✎</span> Edit
+                      <span style={{ fontSize: 13 }}>&#9998;</span> Edit
                     </button>
 
                     <button onClick={() => setDeleteConfirm(blog.id)}
@@ -621,7 +714,7 @@ export default function AdminPage() {
                         cursor: 'pointer', fontSize: 12, fontWeight: 700,
                         display: 'inline-flex', alignItems: 'center', gap: 5,
                       }}>
-                      <span style={{ fontSize: 13 }}>🗑</span> Delete
+                      <span style={{ fontSize: 13 }}>&#x1F5D1;</span> Delete
                     </button>
                   </div>
                 </div>
@@ -649,7 +742,7 @@ export default function AdminPage() {
             }}
             onClick={e => e.stopPropagation()}
           >
-            <div style={{ fontSize: 40, marginBottom: 14 }}>🗑️</div>
+            <div style={{ fontSize: 40, marginBottom: 14 }}>&#x1F5D1;&#xFE0F;</div>
             <h3 style={{ color: c.text, margin: '0 0 8px', fontSize: 19, fontWeight: 800 }}>Delete this post?</h3>
             <p style={{ color: c.muted, fontSize: 14, margin: '0 0 28px', lineHeight: 1.5 }}>
               This action cannot be undone.

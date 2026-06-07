@@ -1,15 +1,13 @@
 "use client";
 
-import { Menu, Moon, Sun, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { navItems } from "@/lib/portfolio-data";
-import { useTheme } from "@/components/providers/theme-provider";
 
 export function Navbar() {
   const [open, setOpen] = useState(false);
-  const { theme, toggleTheme } = useTheme();
 
   return (
     <header className="fixed left-0 right-0 top-0 z-50 border-b-2 border-foreground bg-background/88 backdrop-blur">
@@ -29,9 +27,6 @@ export function Navbar() {
           ))}
         </div>
         <div className="flex items-center gap-2">
-          <Button size="icon" variant="secondary" onClick={toggleTheme} aria-label="Toggle theme">
-            {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
-          </Button>
           <Button size="icon" variant="secondary" className="md:hidden" onClick={() => setOpen((value) => !value)}>
             {open ? <X size={20} /> : <Menu size={20} />}
           </Button>

@@ -14,17 +14,6 @@
   --border: 0 0% 7%;
 }
 
-.dark {
-  --background: 0 0% 7%;
-  --foreground: 43 100% 95%;
-  --muted: 0 0% 14%;
-  --muted-foreground: 43 35% 78%;
-  --primary: 79 100% 59%;
-  --primary-foreground: 0 0% 7%;
-  --accent: 8 100% 67%;
-  --accent-foreground: 0 0% 7%;
-  --border: 43 100% 95%;
-}
 
 * {
   border-color: hsl(var(--border));
@@ -45,12 +34,6 @@ body {
   text-rendering: optimizeLegibility;
 }
 
-.dark body {
-  background:
-    linear-gradient(90deg, rgba(255, 248, 232, 0.06) 1px, transparent 1px),
-    linear-gradient(rgba(255, 248, 232, 0.06) 1px, transparent 1px),
-    hsl(var(--background));
-}
 
 ::selection {
   background: #b8ff2c;

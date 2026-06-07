@@ -31,7 +31,7 @@ export function About() {
             copy="The portfolio narrative is built around measurable community growth, sales alignment, and content-led trust."
           />
         </Reveal>
-        <div className="mt-12 grid gap-5 md:grid-cols-3">
+        <div className="mt-12 grid gap-5 sm:grid-cols-2 md:grid-cols-3">
           {story.map((item, index) => (
             <Reveal key={item.title} delay={index * 0.08}>
               <article className="brutal-card h-full p-6">

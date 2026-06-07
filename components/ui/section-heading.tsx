@@ -13,7 +13,7 @@ export function SectionHeading({ eyebrow, title, copy, className }: SectionHeadi
       <p className="mb-4 inline-flex border-2 border-foreground bg-primary px-3 py-1 font-display text-xs font-black uppercase">
         {eyebrow}
       </p>
-      <h2 className="font-display text-4xl font-black leading-none text-balance md:text-6xl">{title}</h2>
+      <h2 className="font-display text-3xl font-black leading-none text-balance sm:text-4xl md:text-6xl">{title}</h2>
       {copy ? <p className="mt-5 text-base leading-7 text-muted-foreground md:text-lg">{copy}</p> : null}
     </div>
   );

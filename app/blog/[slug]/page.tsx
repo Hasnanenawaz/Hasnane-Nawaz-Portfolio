@@ -81,21 +81,21 @@ export default async function BlogPostPage({ params }: PageProps) {
             {blog.title}
           </h1>
 
-          {/* Excerpt */}
-          {blog.excerpt && (
-            <p className="text-lg text-[#5a6b52] leading-relaxed mb-8 border-l-4 border-[#1e3a24] pl-4">
-              {blog.excerpt}
-            </p>
-          )}
-
-          {/* Cover image */}
+          {/* Cover image — shown immediately below the headline */}
           {blog.cover_image && (
             // eslint-disable-next-line @next/next/no-img-element
             <img
               src={blog.cover_image}
               alt={blog.title}
-              className="w-full rounded-xl mb-10 max-h-[480px] object-cover border border-[#e8e3d8]"
+              className="w-full rounded-xl mb-8 max-h-[480px] object-cover border border-[#e8e3d8]"
             />
+          )}
+
+          {/* Excerpt */}
+          {blog.excerpt && (
+            <p className="text-lg text-[#5a6b52] leading-relaxed mb-8 border-l-4 border-[#1e3a24] pl-4">
+              {blog.excerpt}
+            </p>
           )}
 
           {/* Content */}

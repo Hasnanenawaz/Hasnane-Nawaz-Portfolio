@@ -171,8 +171,8 @@ export const achievements = [
 export const testimonials = [
   {
     quote:
-      "Built from CV-backed outcomes: Hasnane's portfolio is positioned around measurable growth, leadership, and community execution.",
-    name: "Portfolio positioning note",
-    role: "Replace with client or manager testimonial when available",
+      "I've had the pleasure of directly managing Hasnane at Budding Mariners, where he joined us as a Marketing Intern and quickly grew into the role of Marketing and Sales Head, a journey that truly reflects his dedication and learning ability. He is a quick learner who consistently stepped up to challenges, adapted fast, and took ownership beyond his role. What stood out most was his willingness to grow, accept feedback, and continuously improve, which translated into real impact for the team. Beyond work, Hasnane has always been like a younger brother to me — dependable, sincere, and deeply committed to the team's success. I'm confident he will continue to achieve great things wherever he goes next.",
+    name: "Dr. Swetanshu Subhrajit",
+    role: "CMO at Budding Mariners · Hasnane's Direct Manager & Mentor",
   },
 ];

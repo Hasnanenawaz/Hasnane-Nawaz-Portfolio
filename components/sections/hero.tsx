@@ -16,7 +16,7 @@ export function Hero() {
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.55 }}
-            className="mb-6 inline-flex border-2 border-foreground bg-cyan px-4 py-2 font-black uppercase shadow-brutal-sm"
+            className="mb-6 inline-flex border-2 border-foreground bg-cyan px-3 py-1.5 text-xs font-black uppercase shadow-brutal-sm sm:px-4 sm:py-2 sm:text-sm"
           >
             Social Media Marketer | Content & Growth
           </motion.div>
@@ -24,7 +24,7 @@ export function Hero() {
             initial={{ opacity: 0, y: 28 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.65, delay: 0.08 }}
-            className="font-display text-6xl font-black uppercase leading-[0.88] text-balance md:text-8xl lg:text-9xl"
+            className="font-display text-5xl font-black uppercase leading-[0.88] text-balance sm:text-6xl md:text-8xl lg:text-9xl"
           >
             Hasnane Nawaz
           </motion.h1>
@@ -32,7 +32,7 @@ export function Hero() {
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.65, delay: 0.16 }}
-            className="mt-6 max-w-2xl text-lg leading-8 text-muted-foreground md:text-xl"
+            className="mt-6 max-w-2xl text-base leading-7 text-muted-foreground sm:text-lg sm:leading-8 md:text-xl"
           >
             I turn scattered attention into structured communities, qualified leads, and measurable growth. My edge is
             simple: content instincts, sales discipline, and the research mindset of a law student.
@@ -65,11 +65,11 @@ export function Hero() {
             2.5+ yrs
           </div>
           <div className="border-2 border-foreground bg-background p-5">
-            <p className="font-display text-2xl font-black uppercase">Growth operator profile</p>
+            <p className="font-display text-xl font-black uppercase sm:text-2xl">Growth operator profile</p>
             <div className="mt-6 grid gap-4">
               {metrics.map((metric) => (
                 <div key={metric.label} className="flex items-center justify-between border-b-2 border-foreground pb-3">
-                  <span className="font-display text-4xl font-black">{metric.value}</span>
+                  <span className="font-display text-2xl font-black sm:text-3xl md:text-4xl">{metric.value}</span>
                   <span className="max-w-32 text-right text-sm font-bold uppercase">{metric.label}</span>
                 </div>
               ))}

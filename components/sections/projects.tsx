@@ -5,7 +5,7 @@ import { SectionHeading } from "@/components/ui/section-heading";
 
 export function Projects() {
   return (
-    <section id="projects" className="section-pad bg-foreground text-background">
+    <section id="projects" className="section-pad bg-background">
       <div className="container">
         <Reveal>
           <SectionHeading
@@ -17,7 +17,7 @@ export function Projects() {
         <div className="mt-12 grid gap-6 md:grid-cols-2">
           {projects.map((project, index) => (
             <Reveal key={project.title} delay={index * 0.07}>
-              <article className="group h-full border-2 border-background bg-background p-5 text-foreground shadow-[8px_8px_0_#B8FF2C] transition-transform hover:-translate-x-1 hover:-translate-y-1 md:p-7">
+              <article className="group h-full border-2 border-foreground bg-white p-5 text-foreground shadow-[4px_4px_0_#B8FF2C] transition-transform hover:-translate-x-1 hover:-translate-y-1 md:p-7 md:shadow-[8px_8px_0_#B8FF2C]">
                 <div className="flex items-start justify-between gap-4">
                   <div className="border-2 border-foreground bg-primary p-3 shadow-brutal-sm">
                     <project.icon className="h-7 w-7" />
@@ -25,7 +25,7 @@ export function Projects() {
                   <ArrowUpRight className="transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
                 </div>
                 <p className="mt-8 text-sm font-black uppercase text-muted-foreground">{project.type}</p>
-                <h3 className="mt-2 font-display text-3xl font-black uppercase md:text-4xl">{project.title}</h3>
+                <h3 className="mt-2 font-display text-2xl font-black uppercase md:text-3xl lg:text-4xl">{project.title}</h3>
                 <p className="mt-4 inline-flex border-2 border-foreground bg-coral px-3 py-2 font-black uppercase">
                   {project.result}
                 </p>

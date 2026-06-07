@@ -21,11 +21,11 @@ export function Experience() {
                   <div className={`mb-5 inline-flex border-2 border-foreground ${item.color} p-3 shadow-brutal-sm`}>
                     <item.icon className="h-7 w-7" />
                   </div>
-                  <p className="font-display text-2xl font-black uppercase">{item.company}</p>
+                  <p className="font-display text-xl font-black uppercase md:text-2xl">{item.company}</p>
                   <p className="mt-2 text-sm font-black uppercase text-muted-foreground">{item.period}</p>
                 </div>
                 <div>
-                  <h3 className="font-display text-3xl font-black uppercase">{item.role}</h3>
+                  <h3 className="font-display text-2xl font-black uppercase md:text-3xl">{item.role}</h3>
                   <ul className="mt-5 grid gap-3">
                     {item.highlights.map((highlight) => (
                       <li key={highlight} className="flex gap-3 leading-7">
