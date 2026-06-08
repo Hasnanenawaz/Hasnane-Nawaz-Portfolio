@@ -1,14 +1,14 @@
 import { ImageResponse } from "next/og";
+import { readFileSync } from "fs";
+import { join } from "path";
 
 export const alt = "Hasnane Nawaz - Social Media Marketing Portfolio";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
 export default async function OGImage() {
-  const photoRes = await fetch("https://www.hasnanenawaz.in/hasnane.png");
-  const photoBuffer = await photoRes.arrayBuffer();
-  const photoBase64 = Buffer.from(photoBuffer).toString("base64");
-  const photoSrc = `data:image/png;base64,${photoBase64}`;
+  const photoBuffer = readFileSync(join(process.cwd(), "public/hasnane.png"));
+  const photoSrc = `data:image/png;base64,${photoBuffer.toString("base64")}`;
 
   return new ImageResponse(
     (
