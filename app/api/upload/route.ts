@@ -1,6 +1,12 @@
 import { NextResponse } from 'next/server'
-import { supabaseAdmin } from '@/lib/supabase'
+import { v2 as cloudinary } from 'cloudinary'
 import { checkAdminAuth } from '@/lib/auth'
+
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key:    process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+})
 
 export async function POST(request: Request) {
   const authed = await checkAdminAuth()
@@ -18,21 +24,15 @@ export async function POST(request: Request) {
   const bytes = await file.arrayBuffer()
   const buffer = Buffer.from(bytes)
 
-  const ext = file.name.split('.').pop()
-  const filename = `${Date.now()}-${Math.random().toString(36).substring(7)}.${ext}`
+  const result = await new Promise<{ secure_url: string }>((resolve, reject) => {
+    cloudinary.uploader.upload_stream(
+      { folder: 'blog-covers', resource_type: 'image' },
+      (error, result) => {
+        if (error || !result) return reject(error)
+        resolve(result)
+      }
+    ).end(buffer)
+  })
 
-  const { error } = await supabaseAdmin.storage
-    .from('blog-images')
-    .upload(filename, buffer, {
-      contentType: file.type,
-      upsert: false,
-    })
-
-  if (error) return NextResponse.json({ error: error.message }, { status: 500 })
-
-  const { data: urlData } = supabaseAdmin.storage
-    .from('blog-images')
-    .getPublicUrl(filename)
-
-  return NextResponse.json({ url: urlData.publicUrl })
+  return NextResponse.json({ url: result.secure_url })
 }
