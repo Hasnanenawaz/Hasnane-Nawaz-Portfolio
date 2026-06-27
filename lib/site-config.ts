@@ -23,7 +23,7 @@ export const siteConfig = {
   ],
   // Update linkedin URL if your profile slug differs
   socialLinks: {
-    linkedin: "https://www.linkedin.com/in/hasnane-nawaz",
+    linkedin: "https://www.linkedin.com/in/hasnane-nawaz-19ba32294/",
   },
   personSchema: {
     "@context": "https://schema.org",
@@ -66,7 +66,7 @@ export const siteConfig = {
       { "@type": "Country", name: "India" },
     ],
     sameAs: [
-      "https://www.linkedin.com/in/hasnane-nawaz",
+      "https://www.linkedin.com/in/hasnane-nawaz-19ba32294/",
     ],
     hasOccupation: {
       "@type": "Occupation",

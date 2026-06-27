@@ -1,31 +1,29 @@
-import { Quote } from "lucide-react";
-import { testimonials } from "@/lib/portfolio-data";
-import { Reveal } from "@/components/ui/reveal";
-import { SectionHeading } from "@/components/ui/section-heading";
-
 export function Testimonials() {
   return (
-    <section className="section-pad bg-muted/55">
-      <div className="container">
-        <Reveal>
-          <SectionHeading
-            eyebrow="Testimonials"
-            title="What managers and mentors say."
-          />
-        </Reveal>
-        <div className="mt-12 grid gap-5">
-          {testimonials.map((testimonial) => (
-            <Reveal key={testimonial.name}>
-              <figure className="brutal-card p-6 md:p-8">
-                <Quote className="mb-6 h-10 w-10" />
-                <blockquote className="text-base leading-8 text-muted-foreground md:text-lg">{testimonial.quote}</blockquote>
-                <figcaption className="mt-6 border-t-2 border-foreground pt-4">
-                  <p className="font-display text-xl font-black uppercase">{testimonial.name}</p>
-                  <p className="mt-1 text-sm text-muted-foreground">{testimonial.role}</p>
-                </figcaption>
-              </figure>
-            </Reveal>
-          ))}
+    <section className="section" id="words" style={{ paddingTop: "40px" }}>
+      <div className="wrap">
+        <span className="eyebrow rv">Testimonial</span>
+        <h2 className="title rv rv-d1">What managers and mentors say.</h2>
+        <div className="quote-card rv rv-d2">
+          <span className="mark">&ldquo;</span>
+          <blockquote>
+            I directly managed Hasnane at Budding Mariners, where he joined as a
+            Marketing Intern and quickly grew into{" "}
+            <b>Marketing and Sales Head</b>, a journey that reflects his dedication
+            and learning ability. He&apos;s a quick learner who consistently stepped up,
+            adapted fast, and took ownership beyond his role. What stood out most was
+            his willingness to grow, accept feedback, and improve, which translated
+            into real impact for the team. Dependable, sincere, and deeply committed.
+            I&apos;m confident he&apos;ll continue to achieve great things wherever he
+            goes next.
+          </blockquote>
+          <div className="q-by">
+            <div className="av">SS</div>
+            <div>
+              <div className="nm">Dr. Swetanshu Subhrajit</div>
+              <div className="ti">CMO at Budding Mariners · Direct Manager &amp; Mentor</div>
+            </div>
+          </div>
         </div>
       </div>
     </section>

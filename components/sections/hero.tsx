@@ -1,99 +1,58 @@
-"use client";
-
-import { ArrowDown, ArrowUpRight, Mail } from "lucide-react";
-import Link from "next/link";
-import { motion } from "framer-motion";
-import { MagneticButton } from "@/components/ui/magnetic-button";
-import { metrics } from "@/lib/portfolio-data";
-import { siteConfig } from "@/lib/site-config";
+import { HeroChart } from "@/components/portfolio/hero-chart";
 
 export function Hero() {
   return (
-    <section id="top" className="relative overflow-hidden pt-28 md:pt-32">
-      <div className="container grid min-h-[calc(100vh-4rem)] gap-10 pb-16 md:grid-cols-[1.12fr_0.88fr] md:items-center">
-        <div>
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.55 }}
-            className="mb-6 inline-flex border-2 border-foreground bg-cyan px-3 py-1.5 text-xs font-black uppercase shadow-brutal-sm sm:px-4 sm:py-2 sm:text-sm"
-          >
-            Social Media Marketer | Content & Growth
-          </motion.div>
-          <motion.h1
-            initial={{ opacity: 0, y: 28 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.65, delay: 0.08 }}
-            className="font-display text-5xl font-black uppercase leading-[0.88] text-balance sm:text-6xl md:text-8xl lg:text-9xl"
-          >
-            Hasnane Nawaz
-          </motion.h1>
-          <motion.p
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.65, delay: 0.16 }}
-            className="mt-6 max-w-2xl text-base leading-7 text-muted-foreground sm:text-lg sm:leading-8 md:text-xl"
-          >
-            I turn scattered attention into structured communities, qualified leads, and measurable growth. My edge is
-            simple: content instincts, sales discipline, and the research mindset of a law student.
-          </motion.p>
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.65, delay: 0.24 }}
-            className="mt-8 flex flex-wrap gap-4"
-          >
-            <MagneticButton asChild size="lg">
-              <Link href="#projects">
-                View growth cases <ArrowDown size={18} />
-              </Link>
-            </MagneticButton>
-            <MagneticButton asChild size="lg" variant="secondary">
-              <Link href={`mailto:${siteConfig.email}`}>
-                Hire Hasnane <Mail size={18} />
-              </Link>
-            </MagneticButton>
-          </motion.div>
-        </div>
-        <motion.div
-          initial={{ opacity: 0, rotate: 2, y: 20 }}
-          animate={{ opacity: 1, rotate: -1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.2 }}
-          className="brutal-card relative bg-primary p-5 md:p-7"
-        >
-          <div className="absolute -right-4 -top-4 border-2 border-foreground bg-coral px-4 py-2 font-display font-black uppercase shadow-brutal-sm">
-            2.5+ yrs
-          </div>
-          <div className="border-2 border-foreground bg-background p-5">
-            <p className="font-display text-xl font-black uppercase sm:text-2xl">Growth operator profile</p>
-            <div className="mt-6 grid gap-4">
-              {metrics.map((metric) => (
-                <div key={metric.label} className="flex items-center justify-between border-b-2 border-foreground pb-3">
-                  <span className="font-display text-2xl font-black sm:text-3xl md:text-4xl">{metric.value}</span>
-                  <span className="max-w-32 text-right text-sm font-bold uppercase">{metric.label}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-          <Link
-            href="#contact"
-            className="mt-5 inline-flex w-full items-center justify-center gap-2 border-2 border-foreground bg-foreground px-5 py-4 font-black uppercase text-background"
-          >
-            Start a conversation <ArrowUpRight size={18} />
-          </Link>
-        </motion.div>
+    <section className="hero" id="top">
+      <div className="aurora" aria-hidden="true">
+        <span className="blob b1" />
+        <span className="blob b2" />
+        <span className="blob b3" />
       </div>
-      <div className="border-y-2 border-foreground bg-foreground py-3 text-background">
-        <div className="flex w-[200%] animate-marquee gap-8 font-display text-xl font-black uppercase">
-          {Array.from({ length: 2 }).map((_, index) => (
-            <div key={index} className="flex min-w-1/2 gap-8">
-              <span>Community Growth</span>
-              <span>Lead Generation</span>
-              <span>Meta Ads</span>
-              <span>Content Strategy</span>
-              <span>Sales Alignment</span>
-            </div>
-          ))}
+      <div className="wrap hero-grid">
+        <div>
+          <span className="avail">
+            <span className="live-dot" />
+            Available for growth roles &amp; freelance campaigns
+          </span>
+          <span className="eyebrow role show">
+            Social media marketer · Community &amp; growth systems
+          </span>
+          <h1>
+            <span className="ln"><span>Hasnane</span></span>
+            <span className="ln"><span className="grad">Nawaz</span></span>
+          </h1>
+          <p className="sub">
+            I turn scattered attention into <b>structured communities</b>,{" "}
+            <b>qualified leads</b>, and <b>measurable revenue</b>. Content instincts,
+            sales discipline, and the research mind of a law student, all pointed at one
+            job: growth that shows up in the numbers, not just the likes.
+          </p>
+          <div className="hero-meta">
+            <span>Telegram</span>
+            <span>WhatsApp</span>
+            <span>Facebook</span>
+            <span>Meta Ads</span>
+            <span>Lead Gen</span>
+          </div>
+          <div className="hero-cta">
+            <a href="#work" className="btn btn-primary magnet">
+              See the growth cases <span className="arr">↗</span>
+            </a>
+            <a href="#contact" className="btn btn-ghost magnet">
+              Hire Hasnane
+            </a>
+          </div>
+        </div>
+
+        <div className="panel rv from-right">
+          <div className="panel-head">
+            <span className="lab">Trajectory · 2024 → 2026</span>
+            <span className="live">
+              <span className="pulse" />
+              Compounding
+            </span>
+          </div>
+          <HeroChart />
         </div>
       </div>
     </section>

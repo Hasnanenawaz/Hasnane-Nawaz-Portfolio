@@ -1,21 +1,24 @@
 import type { Metadata } from "next";
-import { Inter, Space_Grotesk } from "next/font/google";
+import { Fraunces, Space_Grotesk } from "next/font/google";
 import Script from "next/script";
 import { Footer } from "@/components/layout/footer";
 import { Navbar } from "@/components/layout/navbar";
-import { ClientProviders } from "@/components/providers/client-providers";
+import { GlobalEffects } from "@/components/portfolio/global-effects";
+import { LoadingScreen } from "@/components/portfolio/loading-screen";
 import { siteConfig } from "@/lib/site-config";
 import "./globals.css";
 
-const inter = Inter({
+const fraunces = Fraunces({
   subsets: ["latin"],
-  variable: "--font-inter",
+  weight: ["400", "500", "600", "700"],
+  style: ["normal", "italic"],
+  variable: "--font-display",
   display: "swap",
 });
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
-  variable: "--font-space-grotesk",
+  variable: "--font-body",
   display: "swap",
 });
 
@@ -54,8 +57,9 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en-IN" suppressHydrationWarning>
-      <body className={`${inter.variable} ${spaceGrotesk.variable} font-sans antialiased`}>
+    <html lang="en-IN">
+      <body className={`${fraunces.variable} ${spaceGrotesk.variable}`}>
+        <LoadingScreen />
         <Script
           id="person-jsonld"
           type="application/ld+json"
@@ -71,11 +75,10 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(siteConfig.professionalServiceSchema) }}
         />
-        <ClientProviders>
-          <Navbar />
-          {children}
-          <Footer />
-        </ClientProviders>
+        <GlobalEffects />
+        <Navbar />
+        {children}
+        <Footer />
       </body>
     </html>
   );

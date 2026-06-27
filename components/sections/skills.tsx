@@ -1,33 +1,51 @@
-import { skillGroups } from "@/lib/portfolio-data";
-import { Reveal } from "@/components/ui/reveal";
-import { SectionHeading } from "@/components/ui/section-heading";
+const skillGroups = [
+  {
+    title: "Growth",
+    accent: "var(--emerald)",
+    chips: ["Social Media Marketing", "Lead Generation", "Community Growth", "Sales Tracking"],
+  },
+  {
+    title: "Content",
+    accent: "var(--clay)",
+    chips: ["Content Strategy", "Campaign Planning", "Copywriting", "Organic Reach"],
+  },
+  {
+    title: "Leadership",
+    accent: "var(--ocean)",
+    chips: ["Communication", "Teamwork", "30-Member Teams", "Time Management"],
+  },
+  {
+    title: "Analysis",
+    accent: "var(--plum)",
+    chips: ["Meta Ads", "CPC Optimization", "ROI Thinking", "Critical Thinking"],
+  },
+];
 
 export function Skills() {
   return (
-    <section id="skills" className="section-pad">
-      <div className="container">
-        <Reveal>
-          <SectionHeading
-            eyebrow="Skills"
-            title="Built for growth work that touches content, community, and sales."
-          />
-        </Reveal>
-        <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {skillGroups.map((group, index) => (
-            <Reveal key={group.title} delay={index * 0.06}>
-              <article className="brutal-card h-full p-5">
-                <h3 className="border-b-2 border-foreground pb-4 font-display text-xl font-black uppercase md:text-3xl">
-                  {group.title}
-                </h3>
-                <div className="mt-5 flex flex-wrap gap-3">
-                  {group.items.map((skill) => (
-                    <span key={skill} className="border-2 border-foreground bg-muted px-3 py-2 text-sm font-bold">
-                      {skill}
-                    </span>
-                  ))}
-                </div>
-              </article>
-            </Reveal>
+    <section className="section" id="skills" style={{ paddingTop: "40px" }}>
+      <div className="wrap">
+        <span className="eyebrow rv">Skills</span>
+        <h2 className="title rv rv-d1">
+          Built for growth work that touches content, community, and sales.
+        </h2>
+        <div className="skills-grid">
+          {skillGroups.map((group, i) => (
+            <div
+              key={group.title}
+              className={`sk-card rv${i > 0 ? ` rv-d${i}` : ""}`}
+              style={{ "--accent": group.accent } as React.CSSProperties}
+            >
+              <h4>
+                <i />
+                {group.title}
+              </h4>
+              {group.chips.map((chip) => (
+                <span key={chip} className="chip">
+                  {chip}
+                </span>
+              ))}
+            </div>
           ))}
         </div>
       </div>
