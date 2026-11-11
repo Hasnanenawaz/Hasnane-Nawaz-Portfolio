@@ -9,7 +9,11 @@ const faqs = [
   },
   {
     q: "What results has he achieved?",
-    a: "He grew a Telegram and WhatsApp community from 10,000 to 50,000+ members in 4 months, raised monthly revenue from Rs. 40,000 to Rs. 3,10,000 in 2 months by managing 30 sales callers, scaled a legal-education community by 300% in 2 months, and grew a Facebook page from 1,000 to 7,000+ followers through Meta Ads.",
+    a: "He grew a Telegram and WhatsApp community from 10,000 to 50,000+ members in 4 months, raised monthly revenue from Rs. 40,000 to Rs. 3,10,000 in 2 months by managing 30 sales callers, scaled a legal-education community by 300% in 2 months, and grew a Facebook page from 1,000 to 7,000+ followers through Meta Ads. He has run 20+ Meta ad campaigns; two visa campaigns at Stamp2Fly turned ₹4,000 of ad spend into ₹50,000 in revenue (12.5x return).",
+  },
+  {
+    q: "Does he do SEO and AI search optimisation?",
+    a: "Yes. As Marketing Executive at Yoga For Cure, he works on SEO, AEO (answer engine optimisation) and GEO (generative engine optimisation), so the site shows up on Google and in AI tools like ChatGPT and Perplexity.",
   },
   {
     q: "What services does he offer?",
@@ -17,7 +21,7 @@ const faqs = [
   },
   {
     q: "Which companies has he worked with?",
-    a: "STAMP2FLY (Marketing & Sales Intern), Budding Mariners (Marketing & Sales Head), The Jus Anima (Social Media & Community Growth Manager), Voodaz (Marketing & Sales Head), and Cureable (Content Writer Intern).",
+    a: "Yoga For Cure (Marketing Executive), STAMP2FLY (Marketing & Sales Intern), Budding Mariners (Marketing & Sales Head), The Jus Anima (Social Media & Community Growth Manager), Voodaz (Marketing & Sales Head), and Cureable (Content Writer Intern).",
   },
   {
     q: "What makes him different?",

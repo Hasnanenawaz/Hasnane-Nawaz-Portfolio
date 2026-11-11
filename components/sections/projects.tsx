@@ -1,5 +1,23 @@
 const caseStudies = [
   {
+    title: "UAE risk-free visa campaign",
+    from: "₹1.5k",
+    to: "₹20k",
+    funnel: ["₹1,500", "50", "10", "₹20,000"],
+    summary: "A Meta Ads campaign for Stamp2Fly at ₹30 per lead, with 1 in 5 leads converting.",
+    tags: ["Meta Ads", "Lead gen", "Visa"],
+    variant: "card-accent",
+  },
+  {
+    title: "Canton Fair China visa campaign",
+    from: "₹2.5k",
+    to: "₹30k",
+    funnel: ["₹2,500", "60", "30", "₹30,000"],
+    summary: "Half the leads became paying customers, for 12x the ad spend.",
+    tags: ["Meta Ads", "WhatsApp leads", "Visa"],
+    variant: "dark",
+  },
+  {
     title: "GP Rating community scale-up",
     from: "10k",
     to: "50k+",
@@ -35,6 +53,8 @@ const caseStudies = [
   },
 ];
 
+const funnelSteps = ["Spend", "Leads", "Customers", "Revenue"];
+
 export function Projects() {
   return (
     <section className="section" id="work">
@@ -52,6 +72,16 @@ export function Projects() {
                 <span className="sr-only">to</span>
                 <span className="to">{cs.to}</span>
               </div>
+              {cs.funnel && (
+                <dl className="funnel">
+                  {cs.funnel.map((value, j) => (
+                    <div key={funnelSteps[j]}>
+                      <dt>{funnelSteps[j]}</dt>
+                      <dd>{value}</dd>
+                    </div>
+                  ))}
+                </dl>
+              )}
               <h3>{cs.title}</h3>
               <p>{cs.summary}</p>
               <div className="tags">

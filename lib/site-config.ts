@@ -59,6 +59,9 @@ export const siteConfig = {
       "Campaign Planning",
       "Copywriting",
       "CPC Optimization",
+      "SEO",
+      "Answer engine optimisation",
+      "Generative engine optimisation",
     ],
     knowsLanguage: "en",
     areaServed: [

@@ -1,5 +1,13 @@
 const jobs = [
   {
+    company: "Yoga For Cure",
+    period: "[START MONTH YEAR] — Present",
+    role: "Marketing Executive",
+    highlights: [
+      <>Leads SEO, AEO and GEO for yogaforcure.in, making the site easier to find on Google and in AI answers from ChatGPT, Perplexity and Gemini.</>,
+    ],
+  },
+  {
     company: "Stamp2Fly",
     period: "Apr 2025 — Jan 2026",
     role: "Marketing & Sales Intern",
@@ -7,6 +15,7 @@ const jobs = [
       <>Built the company&apos;s B2B marketing framework and aligned the sales and marketing teams for efficiency.</>,
       <>Ran business research to identify and secure <b>high-profile leads</b>.</>,
       <>Achieved <b>20% revenue growth</b> by streamlining lead acquisition and conversion.</>,
+      <>Ran 20+ Meta ad campaigns, including a UAE visa campaign (<b>₹1,500 → ₹20,000 revenue</b>) and a Canton Fair China visa campaign (<b>₹2,500 → ₹30,000 revenue</b>).</>,
     ],
   },
   {
@@ -63,7 +72,7 @@ export function Experience() {
             Where the <span className="serif">results</span> came from.
           </h2>
           <p className="lede rv rv-d2">
-            From content intern to Marketing &amp; Sales Head, leading a team of 30 callers.
+            From content intern to Marketing &amp; Sales Head, leading 30 callers and running 20+ ad campaigns.
           </p>
         </div>
         <ol className="tl sx">

@@ -7,6 +7,10 @@ const items = [
   "Lead Generation",
   "Copywriting",
   "CPC Optimization",
+  "SEO",
+  "AEO",
+  "GEO",
+  "Meta Ads ROI",
 ];
 
 export function MarqueeSection() {

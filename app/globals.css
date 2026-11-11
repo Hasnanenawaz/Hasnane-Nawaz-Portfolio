@@ -323,6 +323,9 @@ header.nav.scrolled .nav-inner { background: rgba(23,20,31,.9); }
 .stat .cap { margin-top: 14px; font-weight: 600; font-size: .95rem; line-height: 1.35; }
 .stat.ember { background: var(--ember); border-color: var(--ember); }
 .stat.ember .big, .stat.ember .cap { color: var(--bg); }
+.stat .big.pair { font-size: clamp(30px,2.9vw,42px); }
+.stat .big .ar { color: var(--text-dim); font-weight: 600; }
+.stats-title { font-size: clamp(28px,3.4vw,44px); margin-top: clamp(64px,8vw,96px); }
 
 /* ─── HOW I WORK ─────────────────────────────────────────────────────────── */
 .steps { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin-top: 48px; }
@@ -379,6 +382,18 @@ header.nav.scrolled .nav-inner { background: rgba(23,20,31,.9); }
 .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; padding-top: 22px; }
 .tags span { font-size: .78rem; font-weight: 600; padding: 6px 12px; border-radius: 999px; background: rgba(255,255,255,.09); }
 .case.ember .tags span { background: rgba(12,10,18,.14); }
+.funnel { display: grid; grid-template-columns: repeat(4,1fr); gap: 8px 16px; margin-top: 18px; }
+.funnel div { position: relative; padding: 10px 12px; border-radius: 14px; background: rgba(255,255,255,.06); }
+.funnel div:not(:last-child)::after {
+  content: "→"; position: absolute; right: -8px; top: 50%; transform: translate(50%,-50%);
+  font-size: .8rem; color: var(--lilac);
+}
+@media(max-width:440px) {
+  .funnel { grid-template-columns: repeat(2,1fr); }
+  .funnel div:nth-child(2)::after { display: none; }
+}
+.funnel dt { font-size: .7rem; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; color: var(--text-dim); }
+.funnel dd { margin-top: 2px; font-weight: 800; font-size: 1rem; letter-spacing: -.02em; color: var(--text); }
 
 /* ─── TESTIMONIAL ────────────────────────────────────────────────────────── */
 .quote-card { padding: clamp(32px,5vw,64px); }
