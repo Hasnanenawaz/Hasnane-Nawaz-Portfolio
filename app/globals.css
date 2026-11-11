@@ -436,6 +436,69 @@ header.nav.scrolled .nav-inner { background: rgba(23,20,31,.9); }
   margin-bottom: 32px; transition: color .2s;
 }
 .blog-back:hover { color: var(--ember); }
+.blog-index { padding: clamp(132px,14vw,170px) 0 clamp(88px,10vw,140px); min-height: 100vh; }
+.blog-index .blog-grid { margin-top: 48px; }
+.blog-empty { padding: 80px 0; color: var(--text-muted); font-size: 1.1rem; }
+
+/* ─── BLOG POST (reading) ────────────────────────────────────────────────── */
+.post { padding: clamp(120px,13vw,160px) 0 clamp(72px,8vw,110px); min-height: 100vh; }
+.post-wrap { max-width: calc(720px + 2 * clamp(16px,4vw,32px)); }
+.post-date { font-size: .85rem; font-weight: 600; color: var(--lilac); }
+.post-title { font-weight: 800; font-size: clamp(34px,5vw,56px); line-height: 1.05; letter-spacing: -.035em; margin: 14px 0 28px; }
+.post-cover { width: 100%; max-height: 480px; object-fit: cover; border-radius: 24px; border: 1.5px solid var(--border); margin-bottom: 36px; }
+.post-excerpt { font-size: 1.2rem; line-height: 1.6; color: var(--text-muted); border-left: 3px solid var(--ember); padding-left: 20px; margin-bottom: 36px; }
+.post-foot { border-top: 1px solid var(--border); margin-top: 64px; padding-top: 40px; text-align: center; }
+
+.post-body { font-size: 1.125rem; line-height: 1.7; color: rgba(255,255,255,.86); overflow-wrap: break-word; }
+.post-body p, .post-body ul, .post-body ol, .post-body pre, .post-body blockquote, .post-body figure { margin: 0 0 1.4em; }
+.post-body h2, .post-body h3, .post-body h4 { color: var(--text); font-weight: 800; letter-spacing: -.03em; line-height: 1.15; margin: 2.2em 0 .7em; }
+.post-body h2 { font-size: clamp(1.6rem,3vw,2rem); }
+.post-body h3 { font-size: 1.35rem; }
+.post-body h4 { font-size: 1.1rem; }
+.post-body a { color: var(--lilac); text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
+.post-body a:hover { color: var(--text); }
+.post-body strong, .post-body b { color: var(--text); font-weight: 700; }
+.post-body ul, .post-body ol { padding-left: 1.4em; }
+.post-body li + li { margin-top: .4em; }
+.post-body li::marker { color: var(--lilac); }
+.post-body blockquote {
+  border-left: 3px solid var(--ember); padding: .2em 0 .2em 1.1em;
+  font-family: var(--font-serif), Georgia, serif; font-style: italic; font-size: 1.35em; line-height: 1.45; color: var(--text);
+}
+.post-body code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: .88em; background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: .12em .4em; }
+.post-body pre { background: var(--bg-deep); border: 1.5px solid var(--border); border-radius: 16px; padding: 18px 20px; overflow-x: auto; line-height: 1.55; }
+.post-body pre code { background: none; border: 0; padding: 0; font-size: .9rem; }
+.post-body img { border-radius: 16px; height: auto; }
+.post-body hr { border: 0; border-top: 1px solid var(--border); margin: 2.4em 0; }
+
+/* Blog Builder posts (.hn-article, styled light further down for the admin
+   preview) are re-mapped to the dark reading palette on the public post page. */
+.post .hn-article {
+  --paper: #FFFFFF;
+  --paper-2: var(--surface);
+  --rule: rgba(255,255,255,.12);
+  --ink: rgba(255,255,255,.86);
+  --ink-soft: var(--text-muted);
+  --forest: #FFFFFF;
+  --forest-deep: var(--surface-accent);
+  --marigold: var(--ember-soft);
+  max-width: 720px; font-size: 1.125rem; line-height: 1.7;
+}
+.post .hn-article, .post .hn-article * { font-family: var(--font-sans), system-ui, sans-serif; }
+.post .hn-article h1 { font-weight: 800; letter-spacing: -.035em; font-size: clamp(34px,5vw,56px); }
+.post .hn-article h2 { font-weight: 800; letter-spacing: -.03em; }
+.post .hn-article .lead { font-size: 1.25rem; }
+.post .hn-article .lead::first-letter, .post .hn-article .statstrip .fig, .post .hn-article .stat-aside .fig, .post .hn-article .ctabox h3 { font-weight: 800; }
+.post .hn-article .pull { font-family: var(--font-serif), Georgia, serif; color: var(--text); border-color: var(--rule); }
+.post .hn-article .avatar { background: var(--ember); color: var(--bg); }
+.post .hn-article .contents, .post .hn-article .thesis, .post .hn-article .localbox { border-radius: 18px; }
+.post .hn-article .contents { display: block; } /* Tailwind's .contents utility sets display: contents */
+.post .hn-article .searchrow { background: var(--bg); }
+.post .hn-article .cell { background: rgba(255,255,255,.08); }
+.post .hn-article .cell.pay, .post .hn-article .legend .ip { background: var(--lilac); }
+.post .hn-article .ctabox { border-radius: 24px; box-shadow: inset 0 0 0 1.5px var(--border-accent); }
+.post .hn-article .ctabox p { color: var(--text-muted); }
+.post .hn-article .ctabox .fc-btn { background: var(--ember); color: var(--bg); }
 
 /* ─── FAQ ────────────────────────────────────────────────────────────────── */
 .faq { margin-top: 44px; border-top: 1px solid rgba(255,255,255,.12); }

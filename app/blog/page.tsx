@@ -1,4 +1,4 @@
-import Link from 'next/link'
+import { BlogCardLink } from '@/components/portfolio/blog-card'
 import { getBlogs } from '@/lib/blogs'
 import type { Metadata } from 'next'
 import { siteConfig } from '@/lib/site-config'
@@ -19,12 +19,6 @@ export const metadata: Metadata = {
 }
 
 export const revalidate = 60
-
-function formatDate(dateStr: string) {
-  return new Date(dateStr).toLocaleDateString('en-IN', {
-    day: 'numeric', month: 'long', year: 'numeric',
-  }).toUpperCase()
-}
 
 export default async function BlogPage() {
   const blogs = await getBlogs()
@@ -72,61 +66,29 @@ export default async function BlogPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
-      <main style={{ background: 'var(--canvas)', minHeight: '100vh', paddingTop: '96px', paddingBottom: '96px' }}>
+      <main className="blog-index">
         <div className="wrap">
+          <span className="label rv">Writing</span>
+          <h1 className="h2 rv rv-d1">
+            The <span className="serif">Blog</span>
+          </h1>
+          <p className="lede rv rv-d2">Social media insights, marketing tips &amp; real talk.</p>
 
-          {/* ── Header ── */}
-          <div className="rv" style={{ textAlign: 'center', marginBottom: '64px' }}>
-            <span className="eyebrow show" style={{ justifyContent: 'center' }}>Writing</span>
-            <h1
-              className="title"
-              style={{ margin: '0 auto', textAlign: 'center', maxWidth: 'none', fontSize: 'clamp(2.6rem,6vw,4.2rem)' }}
-            >
-              The <em>Blog</em>
-            </h1>
-            <p className="lede" style={{ textAlign: 'center', margin: '18px auto 0' }}>
-              Social media insights, marketing tips &amp; real talk.
-            </p>
-          </div>
-
-          {/* ── Empty state ── */}
           {blogs.length === 0 && (
-            <div className="rv" style={{ textAlign: 'center', padding: '80px 0' }}>
-              <p style={{ color: 'var(--ink-soft)', fontSize: '1.1rem' }}>No posts yet — check back soon.</p>
-            </div>
+            <p className="blog-empty rv">No posts yet — check back soon.</p>
           )}
 
-          {/* ── Card grid ── */}
           <div className="blog-grid">
             {blogs.map((blog, i) => (
-              <Link
+              <BlogCardLink
                 key={blog.id}
-                href={`/blog/${blog.slug}`}
-                className={`rv${i < 3 ? ` rv-d${i + 1}` : ''}`}
-                style={{ display: 'block' }}
-              >
-                <article className="blog-card">
-                  {blog.cover_image ? (
-                    <div className="blog-card__img">
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img src={blog.cover_image} alt={blog.title} />
-                    </div>
-                  ) : (
-                    <div className="blog-card__placeholder" />
-                  )}
-                  <div className="blog-card__body">
-                    <p className="blog-card__date">{formatDate(blog.created_at)}</p>
-                    <h2 className="blog-card__title">{blog.title}</h2>
-                    {blog.excerpt && (
-                      <p className="blog-card__excerpt">{blog.excerpt}</p>
-                    )}
-                    <span className="blog-card__cta">Read more →</span>
-                  </div>
-                </article>
-              </Link>
+                blog={blog}
+                showImage
+                titleAs="h2"
+                className={`rv${i % 3 ? ` rv-d${i % 3}` : ''}`}
+              />
             ))}
           </div>
-
         </div>
       </main>
     </>

@@ -87,15 +87,15 @@ function renderContent(content: string) {
   const paragraphs = content.split(/\n\n+/).filter(p => p.trim())
   if (paragraphs.length <= 1) {
     return (
-      <div style={{ color: 'var(--ink)', fontSize: '1.07rem', lineHeight: '1.9', whiteSpace: 'pre-wrap', wordBreak: 'break-word' }}>
+      <div style={{ whiteSpace: 'pre-wrap' }}>
         {content}
       </div>
     )
   }
   return (
-    <div style={{ color: 'var(--ink)', fontSize: '1.07rem', lineHeight: '1.9' }}>
+    <div>
       {paragraphs.map((para, i) => (
-        <p key={i} style={{ marginBottom: '1.4rem' }}>
+        <p key={i}>
           {para.split('\n').map((line, j, arr) =>
             j < arr.length - 1 ? [line, <br key={j} />] : line
           )}
@@ -168,8 +168,8 @@ export default async function BlogPostPage({ params }: PageProps) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
-      <main style={{ background: 'var(--canvas)', minHeight: '100vh', paddingTop: '96px', paddingBottom: '96px' }}>
-        <div className="wrap" style={{ maxWidth: builderPost ? '56rem' : '46rem' }}>
+      <main className="post">
+        <div className="wrap post-wrap">
 
           {/* Back link */}
           <Link href="/blog" className="blog-back">
@@ -178,53 +178,32 @@ export default async function BlogPostPage({ params }: PageProps) {
 
           {builderPost ? (
             /* Builder HTML — already contains its own header, title, byline, content */
-            <div style={{ background: 'var(--paper)', borderRadius: '22px', padding: 'clamp(24px,5vw,48px)', border: '1px solid var(--line)' }}>
+            <div className="post-body">
               {blog.content ? renderContent(blog.content) : null}
             </div>
           ) : (
             /* Plain text post */
             <article>
-              <p className="blog-card__date" style={{ marginBottom: '14px' }}>
-                {formatDate(blog.created_at)}
-              </p>
+              <p className="post-date">{formatDate(blog.created_at)}</p>
 
-              <h1
-                className="title"
-                style={{ maxWidth: 'none', fontSize: 'clamp(2rem,5vw,3.2rem)', marginTop: 0, marginBottom: '28px' }}
-              >
-                {blog.title}
-              </h1>
+              <h1 className="post-title">{blog.title}</h1>
 
               {blog.cover_image && (
                 // eslint-disable-next-line @next/next/no-img-element
-                <img
-                  src={blog.cover_image}
-                  alt={blog.title}
-                  style={{
-                    width: '100%', borderRadius: '18px', marginBottom: '36px',
-                    maxHeight: '480px', objectFit: 'cover',
-                    border: '1px solid var(--line)',
-                  }}
-                />
+                <img className="post-cover" src={blog.cover_image} alt={blog.title} />
               )}
 
-              {blog.excerpt && (
-                <p style={{
-                  fontSize: '1.12rem', lineHeight: '1.7', color: 'var(--ink-soft)',
-                  borderLeft: '3px solid var(--emerald)', paddingLeft: '20px',
-                  marginBottom: '36px', fontStyle: 'italic',
-                }}>
-                  {blog.excerpt}
-                </p>
-              )}
+              {blog.excerpt && <p className="post-excerpt">{blog.excerpt}</p>}
 
-              {blog.content ? renderContent(blog.content) : null}
+              <div className="post-body">
+                {blog.content ? renderContent(blog.content) : null}
+              </div>
             </article>
           )}
 
           {/* Footer nav */}
-          <div style={{ borderTop: '1px solid var(--line)', marginTop: '64px', paddingTop: '40px', textAlign: 'center' }}>
-            <Link href="/blog" className="btn btn-ghost" style={{ fontSize: '.92rem' }}>
+          <div className="post-foot">
+            <Link href="/blog" className="btn btn-ghost">
               ← All Posts
             </Link>
           </div>
