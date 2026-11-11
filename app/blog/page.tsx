@@ -88,65 +88,55 @@ export default async function BlogPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
-      <main className="min-h-screen bg-[#f5f0e8] pt-24 pb-20">
-        <div className="container">
+      <main style={{ background: 'var(--canvas)', minHeight: '100vh', paddingTop: '96px', paddingBottom: '96px' }}>
+        <div className="wrap">
 
           {/* ── Header ── */}
-          <div className="text-center mb-14">
-            <h1 className="font-display text-5xl md:text-6xl font-black text-[#1e3a24] mb-3">
-              Blog
+          <div className="rv" style={{ textAlign: 'center', marginBottom: '64px' }}>
+            <span className="eyebrow show" style={{ justifyContent: 'center' }}>Writing</span>
+            <h1
+              className="title"
+              style={{ margin: '0 auto', textAlign: 'center', maxWidth: 'none', fontSize: 'clamp(2.6rem,6vw,4.2rem)' }}
+            >
+              The <em>Blog</em>
             </h1>
-            <p className="text-[#5a6b52] text-base md:text-lg max-w-sm mx-auto leading-relaxed">
+            <p className="lede" style={{ textAlign: 'center', margin: '18px auto 0' }}>
               Social media insights, marketing tips &amp; real talk.
             </p>
-            <div className="w-10 h-[3px] bg-[#1e3a24] mx-auto mt-5 rounded" />
           </div>
 
           {/* ── Empty state ── */}
           {blogs.length === 0 && (
-            <div className="text-center py-24">
-              <p className="text-[#5a6b52] text-lg">No posts yet — check back soon!</p>
+            <div className="rv" style={{ textAlign: 'center', padding: '80px 0' }}>
+              <p style={{ color: 'var(--ink-soft)', fontSize: '1.1rem' }}>No posts yet — check back soon.</p>
             </div>
           )}
 
           {/* ── Card grid ── */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {blogs.map(blog => (
-              <Link key={blog.id} href={`/blog/${blog.slug}`} className="group block">
-                <article className="bg-white rounded-2xl overflow-hidden border border-[#e8e3d8] shadow-sm hover:shadow-md transition-all duration-200 hover:-translate-y-1 flex flex-col h-full">
-
-                  {/* Cover image */}
+          <div className="blog-grid">
+            {blogs.map((blog, i) => (
+              <Link
+                key={blog.id}
+                href={`/blog/${blog.slug}`}
+                className={`rv${i < 3 ? ` rv-d${i + 1}` : ''}`}
+                style={{ display: 'block' }}
+              >
+                <article className="blog-card">
                   {blog.cover_image ? (
-                    <div className="aspect-video overflow-hidden">
+                    <div className="blog-card__img">
                       {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img
-                        src={blog.cover_image}
-                        alt={blog.title}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                      />
+                      <img src={blog.cover_image} alt={blog.title} />
                     </div>
                   ) : (
-                    <div className="aspect-video bg-[#e8e3d8] flex items-center justify-center">
-                      <span className="text-4xl opacity-40">📝</span>
-                    </div>
+                    <div className="blog-card__placeholder" />
                   )}
-
-                  {/* Card body */}
-                  <div className="p-6 flex flex-col flex-1">
-                    <p className="text-[11px] font-bold tracking-widest text-[#7a8a6a] mb-2">
-                      {formatDate(blog.created_at)}
-                    </p>
-                    <h2 className="font-display font-bold text-[#1e3a24] text-lg leading-snug mb-2 line-clamp-2">
-                      {blog.title}
-                    </h2>
+                  <div className="blog-card__body">
+                    <p className="blog-card__date">{formatDate(blog.created_at)}</p>
+                    <h2 className="blog-card__title">{blog.title}</h2>
                     {blog.excerpt && (
-                      <p className="text-[#5a6b52] text-sm leading-relaxed line-clamp-3 mb-4 flex-1">
-                        {blog.excerpt}
-                      </p>
+                      <p className="blog-card__excerpt">{blog.excerpt}</p>
                     )}
-                    <span className="text-sm font-bold text-[#1e3a24] mt-auto group-hover:underline">
-                      Read more →
-                    </span>
+                    <span className="blog-card__cta">Read more →</span>
                   </div>
                 </article>
               </Link>

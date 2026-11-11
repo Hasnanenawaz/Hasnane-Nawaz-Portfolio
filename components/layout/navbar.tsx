@@ -10,18 +10,18 @@ export function Navbar() {
   return (
     <header className="nav" id="nav">
       <div className="wrap nav-inner">
-        <a href="#top" className="logo">
+        <Link href="/" className="logo">
           <span className="dot" />
           Hasnane.
-        </a>
+        </Link>
         <nav className={`nav-links${open ? " open" : ""}`} id="navLinks">
-          <a href="#about" onClick={close}>About</a>
-          <a href="#approach" onClick={close}>Approach</a>
-          <a href="#experience" onClick={close}>Experience</a>
-          <a href="#work" onClick={close}>Work</a>
-          <a href="#proof" onClick={close}>Proof</a>
+          <Link href="/#about" onClick={close}>About</Link>
+          <Link href="/#approach" onClick={close}>Approach</Link>
+          <Link href="/#experience" onClick={close}>Experience</Link>
+          <Link href="/#work" onClick={close}>Work</Link>
+          <Link href="/#proof" onClick={close}>Proof</Link>
           <Link href="/blog" onClick={close}>Blog</Link>
-          <a href="#contact" className="nav-cta" onClick={close}>Let&apos;s talk</a>
+          <Link href="/#contact" className="nav-cta" onClick={close}>Let&apos;s talk</Link>
         </nav>
         <button
           className={`burger${open ? " open" : ""}`}

@@ -87,15 +87,15 @@ function renderContent(content: string) {
   const paragraphs = content.split(/\n\n+/).filter(p => p.trim())
   if (paragraphs.length <= 1) {
     return (
-      <div className="text-[#1a1a14] text-base md:text-[17px] leading-[1.9] whitespace-pre-wrap break-words">
+      <div style={{ color: 'var(--ink)', fontSize: '1.07rem', lineHeight: '1.9', whiteSpace: 'pre-wrap', wordBreak: 'break-word' }}>
         {content}
       </div>
     )
   }
   return (
-    <div className="text-[#1a1a14] text-base md:text-[17px] leading-[1.9] space-y-5">
+    <div style={{ color: 'var(--ink)', fontSize: '1.07rem', lineHeight: '1.9' }}>
       {paragraphs.map((para, i) => (
-        <p key={i}>
+        <p key={i} style={{ marginBottom: '1.4rem' }}>
           {para.split('\n').map((line, j, arr) =>
             j < arr.length - 1 ? [line, <br key={j} />] : line
           )}
@@ -168,54 +168,63 @@ export default async function BlogPostPage({ params }: PageProps) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
-      <main className="min-h-screen bg-[#f5f0e8] pt-24 pb-20">
-        <div className={`container ${builderPost ? 'max-w-4xl' : 'max-w-3xl'}`}>
+      <main style={{ background: 'var(--canvas)', minHeight: '100vh', paddingTop: '96px', paddingBottom: '96px' }}>
+        <div className="wrap" style={{ maxWidth: builderPost ? '56rem' : '46rem' }}>
 
           {/* Back link */}
-          <Link
-            href="/blog"
-            className="inline-flex items-center gap-1 text-sm text-[#5a6b52] hover:text-[#1e3a24] transition-colors mb-10 font-medium"
-          >
-            ← Back to Blog
+          <Link href="/blog" className="blog-back">
+            ← All posts
           </Link>
 
           {builderPost ? (
             /* Builder HTML — already contains its own header, title, byline, content */
-            <div className="bg-[#F4EEE2] rounded-2xl p-6 md:p-10">
+            <div style={{ background: 'var(--paper)', borderRadius: '22px', padding: 'clamp(24px,5vw,48px)', border: '1px solid var(--line)' }}>
               {blog.content ? renderContent(blog.content) : null}
             </div>
           ) : (
             /* Plain text post */
             <article>
-              <p className="text-[11px] font-bold tracking-widest text-[#7a8a6a] mb-3 uppercase">
+              <p className="blog-card__date" style={{ marginBottom: '14px' }}>
                 {formatDate(blog.created_at)}
               </p>
-              <h1 className="font-display text-4xl md:text-5xl font-black text-[#1e3a24] leading-tight mb-4">
+
+              <h1
+                className="title"
+                style={{ maxWidth: 'none', fontSize: 'clamp(2rem,5vw,3.2rem)', marginTop: 0, marginBottom: '28px' }}
+              >
                 {blog.title}
               </h1>
+
               {blog.cover_image && (
                 // eslint-disable-next-line @next/next/no-img-element
                 <img
                   src={blog.cover_image}
                   alt={blog.title}
-                  className="w-full rounded-xl mb-8 max-h-[480px] object-cover border border-[#e8e3d8]"
+                  style={{
+                    width: '100%', borderRadius: '18px', marginBottom: '36px',
+                    maxHeight: '480px', objectFit: 'cover',
+                    border: '1px solid var(--line)',
+                  }}
                 />
               )}
+
               {blog.excerpt && (
-                <p className="text-lg text-[#5a6b52] leading-relaxed mb-8 border-l-4 border-[#1e3a24] pl-4">
+                <p style={{
+                  fontSize: '1.12rem', lineHeight: '1.7', color: 'var(--ink-soft)',
+                  borderLeft: '3px solid var(--emerald)', paddingLeft: '20px',
+                  marginBottom: '36px', fontStyle: 'italic',
+                }}>
                   {blog.excerpt}
                 </p>
               )}
+
               {blog.content ? renderContent(blog.content) : null}
             </article>
           )}
 
           {/* Footer nav */}
-          <div className="border-t-2 border-[#1e3a24] mt-16 pt-10 text-center">
-            <Link
-              href="/blog"
-              className="inline-block px-7 py-3 rounded-lg border-2 border-[#1e3a24] font-bold text-sm text-[#1e3a24] hover:bg-[#1e3a24] hover:text-white transition-colors"
-            >
+          <div style={{ borderTop: '1px solid var(--line)', marginTop: '64px', paddingTop: '40px', textAlign: 'center' }}>
+            <Link href="/blog" className="btn btn-ghost" style={{ fontSize: '.92rem' }}>
               ← All Posts
             </Link>
           </div>

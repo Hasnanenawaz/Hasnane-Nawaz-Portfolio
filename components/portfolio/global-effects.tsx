@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 
 function countUp(el: HTMLElement, reduce: boolean) {
   if (el.dataset.done) return;
@@ -22,6 +23,7 @@ function countUp(el: HTMLElement, reduce: boolean) {
 }
 
 export function GlobalEffects() {
+  const pathname = usePathname();
   const [progress, setProgress] = useState(0);
   const [showTop, setShowTop] = useState(false);
 
@@ -77,7 +79,7 @@ export function GlobalEffects() {
 
     document.querySelectorAll(".rv").forEach((el) => io.observe(el));
     return () => io.disconnect();
-  }, []);
+  }, [pathname]);
 
   // Magnetic + tilt effects (fine pointer / desktop only)
   useEffect(() => {

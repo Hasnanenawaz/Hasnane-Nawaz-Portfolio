@@ -1,13 +1,19 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 
 const CHARS = "HASNANE NAWAZ".split("");
 
 export function LoadingScreen() {
-  const [phase, setPhase] = useState<"in" | "out" | "done">("in");
+  const pathname = usePathname();
+  const [phase, setPhase] = useState<"in" | "out" | "done">(
+    pathname !== "/" ? "done" : "in"
+  );
 
   useEffect(() => {
+    if (phase === "done") return;
+
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     if (reduce) {
@@ -33,7 +39,7 @@ export function LoadingScreen() {
       clearTimeout(t2);
       document.body.style.overflow = "";
     };
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   if (phase === "done") return null;
 

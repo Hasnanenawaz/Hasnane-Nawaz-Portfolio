@@ -2,35 +2,60 @@
 
 import { useRef, useState } from "react";
 
+type Status = "idle" | "sending" | "ok" | "err";
+
 export function Contact() {
-  const [note, setNote] = useState("Opens your email app with the message ready to send.");
-  const [noteColor, setNoteColor] = useState("#9fb6a6");
+  const [status, setStatus] = useState<Status>("idle");
+  const [note, setNote] = useState("");
   const nameRef = useRef<HTMLInputElement>(null);
   const emailRef = useRef<HTMLInputElement>(null);
   const msgRef = useRef<HTMLTextAreaElement>(null);
 
-  const handleSend = () => {
+  const handleSend = async () => {
     const nm = nameRef.current?.value.trim() ?? "";
     const em = emailRef.current?.value.trim() ?? "";
     const msg = msgRef.current?.value.trim() ?? "";
 
     if (!nm || !em || !msg) {
+      setStatus("err");
       setNote("Please fill in name, email, and message first.");
-      setNoteColor("#ffd2b8");
       return;
     }
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)) {
-      setNote("That email address looks off, mind checking it?");
-      setNoteColor("#ffd2b8");
+      setStatus("err");
+      setNote("That email address looks off — mind checking it?");
       return;
     }
 
-    const subject = encodeURIComponent(`Growth inquiry from ${nm}`);
-    const body = encodeURIComponent(`${msg}\n\n- ${nm}\n${em}`);
-    window.location.href = `mailto:hasnanenawaz@gmail.com?subject=${subject}&body=${body}`;
-    setNote("Opening your email app…");
-    setNoteColor("#9fb6a6");
+    setStatus("sending");
+    setNote("");
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name: nm, email: em, message: msg }),
+      });
+      const data = await res.json();
+
+      if (res.ok) {
+        setStatus("ok");
+        setNote(data.message ?? "Message sent!");
+        if (nameRef.current) nameRef.current.value = "";
+        if (emailRef.current) emailRef.current.value = "";
+        if (msgRef.current) msgRef.current.value = "";
+      } else {
+        setStatus("err");
+        setNote(data.message ?? "Something went wrong. Please try again.");
+      }
+    } catch {
+      setStatus("err");
+      setNote("Network error. Please try emailing directly.");
+    }
   };
+
+  const noteColor =
+    status === "ok" ? "#a9d820" : status === "err" ? "#ffd2b8" : "#9fb6a6";
 
   return (
     <section className="section contact" id="contact">
@@ -41,8 +66,7 @@ export function Contact() {
         </h2>
         <p className="lede rv rv-d2">
           For growth roles, internships, freelance campaigns, and collaborations. The
-          fastest path is email or phone, and the form opens a ready-to-send email for
-          you.
+          fastest path is email or phone — or fill the form and I&apos;ll get back to you.
         </p>
         <div className="contact-grid">
           <div className="c-info rv from-left">
@@ -104,12 +128,18 @@ export function Contact() {
                 ref={msgRef}
               />
             </div>
-            <button className="btn btn-primary magnet" onClick={handleSend}>
-              Send inquiry ↗
+            <button
+              className="btn btn-primary magnet"
+              onClick={handleSend}
+              disabled={status === "sending"}
+            >
+              {status === "sending" ? "Sending…" : status === "ok" ? "Sent ✓" : "Send inquiry ↗"}
             </button>
-            <p className="form-note" style={{ color: noteColor }}>
-              {note}
-            </p>
+            {note && (
+              <p className="form-note" style={{ color: noteColor }}>
+                {note}
+              </p>
+            )}
           </div>
         </div>
       </div>
