@@ -7,8 +7,11 @@ const CHARS = "HASNANE NAWAZ".split("");
 
 export function LoadingScreen() {
   const pathname = usePathname();
+  // ISR regeneration of the homepage reports "/index" on the server; treating
+  // it as "/" keeps server and client markup identical (avoids React #418).
+  const isHome = pathname === "/" || pathname === "/index";
   const [phase, setPhase] = useState<"in" | "out" | "done">(
-    pathname !== "/" ? "done" : "in"
+    isHome ? "in" : "done"
   );
 
   useEffect(() => {

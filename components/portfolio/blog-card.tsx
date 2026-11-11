@@ -3,7 +3,7 @@ import type { BlogCard } from "@/lib/blogs";
 
 function formatDate(dateStr: string) {
   return new Date(dateStr).toLocaleDateString("en-IN", {
-    day: "numeric", month: "short", year: "numeric",
+    day: "numeric", month: "short", year: "numeric", timeZone: "Asia/Kolkata",
   });
 }
 
