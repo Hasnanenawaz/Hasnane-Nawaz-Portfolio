@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Fraunces, Space_Grotesk } from "next/font/google";
+import { Instrument_Serif, Inter_Tight } from "next/font/google";
 import Script from "next/script";
 import { Footer } from "@/components/layout/footer";
 import { Navbar } from "@/components/layout/navbar";
@@ -8,19 +8,25 @@ import { LoadingScreen } from "@/components/portfolio/loading-screen";
 import { siteConfig } from "@/lib/site-config";
 import "./globals.css";
 
-const fraunces = Fraunces({
+const interTight = Inter_Tight({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  style: ["normal", "italic"],
-  variable: "--font-display",
+  weight: ["400", "500", "600", "700", "800"],
+  variable: "--font-sans",
   display: "swap",
 });
 
-const spaceGrotesk = Space_Grotesk({
+const instrumentSerif = Instrument_Serif({
   subsets: ["latin"],
-  variable: "--font-body",
+  weight: "400",
+  style: "italic",
+  variable: "--font-serif",
   display: "swap",
 });
+
+// Runs before first paint: opts into animation start states only when JS is
+// available and motion is allowed, so server-rendered content is never hidden.
+const jsAnimScript =
+  "if(!matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElement.classList.add('js-anim')";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
@@ -57,8 +63,11 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en-IN">
-      <body className={`${fraunces.variable} ${spaceGrotesk.variable}`}>
+    <html lang="en-IN" suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: jsAnimScript }} />
+      </head>
+      <body className={`${interTight.variable} ${instrumentSerif.variable}`}>
         <LoadingScreen />
         <Script
           id="person-jsonld"

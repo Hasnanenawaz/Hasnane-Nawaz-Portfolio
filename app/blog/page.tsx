@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { supabaseAdmin as supabase, type Blog } from '@/lib/supabase'
+import { getBlogs } from '@/lib/blogs'
 import type { Metadata } from 'next'
 import { siteConfig } from '@/lib/site-config'
 
@@ -19,22 +19,6 @@ export const metadata: Metadata = {
 }
 
 export const revalidate = 60
-
-type BlogCard = Pick<Blog, 'id' | 'title' | 'slug' | 'excerpt' | 'cover_image' | 'created_at'>
-
-async function getBlogs(): Promise<BlogCard[]> {
-  try {
-    const { data, error } = await supabase
-      .from('blogs')
-      .select('id, title, slug, excerpt, cover_image, created_at')
-      .eq('published', true)
-      .order('created_at', { ascending: false })
-    if (error) return []
-    return data ?? []
-  } catch {
-    return []
-  }
-}
 
 function formatDate(dateStr: string) {
   return new Date(dateStr).toLocaleDateString('en-IN', {

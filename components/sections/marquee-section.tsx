@@ -1,18 +1,24 @@
-export function MarqueeSection() {
-  const items = [
-    "Community Growth",
-    "Lead Generation",
-    "Meta Ads",
-    "Content Strategy",
-    "Sales Alignment",
-  ];
+const items = [
+  "Social Media Marketing",
+  "AI Content",
+  "AI Image Generation",
+  "Community Growth",
+  "Meta Ads",
+  "Lead Generation",
+  "Copywriting",
+  "CPC Optimization",
+];
 
+export function MarqueeSection() {
   return (
-    <div className="marquee" aria-hidden="true">
+    <div className="marquee">
       <div className="marquee-track">
-        {[...items, ...items].map((item, i) => (
-          <span key={i}>{item}</span>
-        ))}
+        <ul aria-label="Skills">
+          {items.map((item) => <li key={item}>{item}</li>)}
+        </ul>
+        <ul aria-hidden="true">
+          {items.map((item) => <li key={item}>{item}</li>)}
+        </ul>
       </div>
     </div>
   );

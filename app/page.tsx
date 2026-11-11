@@ -1,5 +1,5 @@
-import { About } from "@/components/sections/about";
 import { Approach } from "@/components/sections/approach";
+import { BlogPreview } from "@/components/sections/blog-preview";
 import { Contact } from "@/components/sections/contact";
 import { Experience } from "@/components/sections/experience";
 import { Faq } from "@/components/sections/faq";
@@ -7,7 +7,7 @@ import { Hero } from "@/components/sections/hero";
 import { MarqueeSection } from "@/components/sections/marquee-section";
 import { Projects } from "@/components/sections/projects";
 import { Proof } from "@/components/sections/proof";
-import { Skills } from "@/components/sections/skills";
+import { Story } from "@/components/sections/story";
 import { Testimonials } from "@/components/sections/testimonials";
 import { siteConfig } from "@/lib/site-config";
 import type { Metadata } from "next";
@@ -17,6 +17,8 @@ export const metadata: Metadata = {
     canonical: siteConfig.url,
   },
 };
+
+export const revalidate = 60;
 
 export default function Home() {
   const faqSchema = {
@@ -47,14 +49,14 @@ export default function Home() {
       <main>
         <Hero />
         <MarqueeSection />
-        <About />
+        <Story />
+        <Proof />
         <Approach />
         <Experience />
-        <Skills />
         <Projects />
-        <Proof />
-        <Faq />
         <Testimonials />
+        <BlogPreview />
+        <Faq />
         <Contact />
       </main>
     </>

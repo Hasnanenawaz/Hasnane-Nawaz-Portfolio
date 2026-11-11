@@ -46,7 +46,7 @@ export function LoadingScreen() {
   return (
     <div className={`ldr${phase === "out" ? " ldr--out" : ""}`} aria-hidden="true">
       <div className="ldr__body">
-        <div className="ldr__mono">H·N</div>
+        <div className="ldr__mono">HN</div>
         <div className="ldr__name">
           {CHARS.map((char, i) =>
             char === " " ? (

@@ -1,25 +1,16 @@
+import Link from "next/link";
+
 export function Footer() {
   return (
     <footer>
       <div className="wrap">
-        <div className="foot-big">
-          Build the next <a href="#contact">growth story.</a>
-        </div>
+        <Link href="/#contact" className="foot-big">
+          Hire <span className="serif">me</span>
+          <span className="arr" aria-hidden="true">→</span>
+        </Link>
         <div className="foot-row">
-          <div className="foot-links">
-            <a href="mailto:hasnanenawaz@gmail.com">Email</a>
-            <a href="tel:+918269786782">Call</a>
-            <a
-              href="https://www.linkedin.com/in/hasnane-nawaz-19ba32294/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              LinkedIn
-            </a>
-          </div>
-          <div className="foot-credit">
-            ✦ Designed for recruiters, founders, and teams who care about growth ✦
-          </div>
+          <p>Hasnane Nawaz · Growth &amp; AI-powered marketing · Durg, Chhattisgarh</p>
+          <a href="#top">Back to top ↑</a>
         </div>
       </div>
     </footer>

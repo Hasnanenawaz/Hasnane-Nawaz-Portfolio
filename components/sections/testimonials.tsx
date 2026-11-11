@@ -1,11 +1,9 @@
 export function Testimonials() {
   return (
-    <section className="section" id="words" style={{ paddingTop: "40px" }}>
+    <section className="section" id="words" style={{ paddingTop: 0 }}>
       <div className="wrap">
-        <span className="eyebrow rv">Testimonial</span>
-        <h2 className="title rv rv-d1">What managers and mentors say.</h2>
-        <div className="quote-card rv rv-d2">
-          <span className="mark">&ldquo;</span>
+        <figure className="card card-accent quote-card rv">
+          <span className="mark" aria-hidden="true">&ldquo;</span>
           <blockquote>
             I directly managed Hasnane at Budding Mariners, where he joined as a
             Marketing Intern and quickly grew into{" "}
@@ -17,14 +15,14 @@ export function Testimonials() {
             I&apos;m confident he&apos;ll continue to achieve great things wherever he
             goes next.
           </blockquote>
-          <div className="q-by">
-            <div className="av">SS</div>
+          <figcaption className="q-by">
+            <div className="av" aria-hidden="true">SS</div>
             <div>
               <div className="nm">Dr. Swetanshu Subhrajit</div>
-              <div className="ti">CMO at Budding Mariners · Direct Manager &amp; Mentor</div>
+              <div className="ti">CMO, Budding Mariners · Hasnane&apos;s direct manager</div>
             </div>
-          </div>
-        </div>
+          </figcaption>
+        </figure>
       </div>
     </section>
   );

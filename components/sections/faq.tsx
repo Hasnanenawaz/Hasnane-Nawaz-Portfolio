@@ -31,16 +31,18 @@ export function Faq() {
   const toggle = (i: number) => setOpenIdx(openIdx === i ? null : i);
 
   return (
-    <section className="section" id="faq" style={{ paddingTop: "40px" }}>
+    <section className="section" id="faq" style={{ paddingTop: 0 }}>
       <div className="wrap">
-        <span className="eyebrow rv">FAQ</span>
-        <h2 className="title rv rv-d1">Common questions, direct answers.</h2>
+        <span className="label rv">FAQ</span>
+        <h2 className="h2 rv rv-d1">
+          Common <span className="serif">questions</span>, direct answers.
+        </h2>
         <div className="faq rv rv-d2">
           {faqs.map((faq, i) => (
             <div key={i} className={`faq-item${openIdx === i ? " open" : ""}`}>
-              <button className="faq-q" onClick={() => toggle(i)}>
+              <button className="faq-q" aria-expanded={openIdx === i} onClick={() => toggle(i)}>
                 {faq.q}
-                <span className="ic">+</span>
+                <span className="ic" aria-hidden="true">+</span>
               </button>
               <div
                 className="faq-a"

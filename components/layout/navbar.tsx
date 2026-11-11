@@ -1,36 +1,63 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+
+const links = [
+  { href: "/#story", label: "Why me" },
+  { href: "/#proof", label: "Proof" },
+  { href: "/#experience", label: "Experience" },
+  { href: "/#work", label: "Work" },
+  { href: "/#blog", label: "Blog" },
+  { href: "/#contact", label: "Contact" },
+];
 
 export function Navbar() {
   const [open, setOpen] = useState(false);
   const close = () => setOpen(false);
 
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpen(false);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [open]);
+
   return (
     <header className="nav" id="nav">
-      <div className="wrap nav-inner">
-        <Link href="/" className="logo">
-          <span className="dot" />
-          Hasnane.
+      <div className="nav-inner">
+        <Link href="/" className="logo" onClick={close}>
+          <span className="badge" aria-hidden="true">HN</span>
+          Hasnane Nawaz
         </Link>
-        <nav className={`nav-links${open ? " open" : ""}`} id="navLinks">
-          <Link href="/#about" onClick={close}>About</Link>
-          <Link href="/#approach" onClick={close}>Approach</Link>
-          <Link href="/#experience" onClick={close}>Experience</Link>
-          <Link href="/#work" onClick={close}>Work</Link>
-          <Link href="/#proof" onClick={close}>Proof</Link>
-          <Link href="/blog" onClick={close}>Blog</Link>
-          <Link href="/#contact" className="nav-cta" onClick={close}>Let&apos;s talk</Link>
+        <nav className="nav-links" aria-label="Main">
+          {links.map((l) => (
+            <Link key={l.href} href={l.href}>{l.label}</Link>
+          ))}
         </nav>
+        <Link href="/#contact" className="btn btn-white nav-cta">
+          Hire me <span className="arr" aria-hidden="true">→</span>
+        </Link>
         <button
-          className={`burger${open ? " open" : ""}`}
+          className="burger"
           aria-label="Menu"
+          aria-expanded={open}
+          aria-controls="nav-sheet"
           onClick={() => setOpen((v) => !v)}
         >
-          <span /><span /><span />
+          <span /><span />
         </button>
       </div>
+      <nav className="nav-sheet" id="nav-sheet" aria-label="Main mobile" hidden={!open}>
+        {links.map((l) => (
+          <Link key={l.href} href={l.href} onClick={close}>{l.label}</Link>
+        ))}
+        <Link href="/#contact" className="btn btn-primary" onClick={close}>
+          Hire me <span className="arr" aria-hidden="true">→</span>
+        </Link>
+      </nav>
     </header>
   );
 }
